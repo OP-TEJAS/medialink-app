@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101014">
+  <title>MediaLink — Mini App Demo</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101014;
+      --panel: #19191f;
+      --muted: #aaa8b4;
+      --text: #f7f5fb;
+      --purple: #7547ee;
+      --pink: #d86bdc;
+      --gold: #f2bd39;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(ellipse at 50% 42%, #24202f 0%, #141419 42%, #0c0c0f 100%);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    .app {
+      width: min(100%, 760px);
+      margin: 0 auto;
+      padding: 26px 22px 42px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .brand {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: clamp(64px, 14vh, 130px);
+      color: #fff;
+      font-size: 13px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 750;
+    }
+    .brand-mark {
+      width: 34px; height: 34px;
+      display: grid; place-items: center;
+      border-radius: 11px;
+      background: linear-gradient(145deg, #8c5bff, #4d39c9);
+      box-shadow: 0 6px 24px #7547ee55;
+      font-size: 18px;
+    }
+    h1 {
+      margin: 0 0 28px;
+      text-align: center;
+      font-size: clamp(28px, 6vw, 43px);
+      line-height: 1.15;
+      letter-spacing: -.045em;
+      font-weight: 800;
+    }
+    h1 span {
+      background: linear-gradient(90deg, #a66bff, #e16bd8 55%, #f4bd43);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .form-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 42px;
+    }
+    input {
+      min-width: 0;
+      flex: 1;
+      height: 58px;
+      border: 1.5px solid #a6a2ad;
+      border-radius: 12px;
+      background: #121216;
+      color: #fff;
+      padding: 0 18px;
+      font-size: 16px;
+      outline: none;
+    }
+    input::placeholder { color: #777580; }
+    input:focus { border-color: #a477ff; box-shadow: 0 0 0 3px #7547ee25; }
+    .primary {
+      min-height: 58px;
+      padding: 0 22px;
+      border: 0;
+      border-radius: 12px;
+      background: #f6f4fa;
+      color: #17151d;
+      font-size: 16px;
+      font-weight: 750;
+      cursor: pointer;
+      transition: transform .15s ease, opacity .15s ease;
+    }
+    .primary:active, .service:active { transform: scale(.98); }
+    .directory {
+      position: relative;
+      padding: 28px 22px 22px;
+      border-radius: 30px;
+      background:
+        linear-gradient(#17171d, #17171d) padding-box,
+        linear-gradient(135deg, #b45cff, #7547ee 48%, #f3bd37) border-box;
+      border: 3px solid transparent;
+      box-shadow: 0 18px 50px #9b45ff20;
+    }
+    .directory h2 {
+      margin: 0 0 24px;
+      text-align: center;
+      font-size: clamp(18px, 4.4vw, 25px);
+      line-height: 1.25;
+      letter-spacing: .025em;
+      font-weight: 850;
+      background: linear-gradient(90deg, #c66cff, #f1a2b7, #f4bd43);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .service-list { display: grid; gap: 15px; }
+    .service {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      min-height: 78px;
+      padding: 15px;
+      border: 0;
+      border-radius: 19px;
+      color: white;
+      background: linear-gradient(105deg, #5144df, #8530df);
+      box-shadow: 0 9px 22px #5726b333;
+      font-size: clamp(16px, 3.8vw, 21px);
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .service .emoji { font-size: 25px; }
+    .notice {
+      display: none;
+      margin: 18px 0 0;
+      padding: 13px 15px;
+      border-radius: 12px;
+      background: #292436;
+      border: 1px solid #66508b;
+      color: #e9dfff;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    .footer {
+      margin: 22px 0 0;
+      text-align: center;
+      color: #85818e;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    @media (max-width: 420px) {
+      .app { padding: 22px 18px 32px; }
+      .brand { margin-bottom: 78px; }
+      .form-row { gap: 9px; }
+      input { padding: 0 13px; font-size: 14px; }
+      .primary { padding: 0 15px; font-size: 14px; }
+      .directory { padding: 25px 16px 18px; border-radius: 26px; }
+      .service { min-height: 70px; border-radius: 17px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <div class="brand"><span class="brand-mark">M</span> MEDIALINK</div>
+
+    <h1>Explore <span>Media Links</span></h1>
+
+    <form class="form-row" id="demoForm">
+      <input id="linkInput" type="url" placeholder="Paste a link here" aria-label="Paste a link" autocomplete="url">
+      <button class="primary" type="submit">Check Link</button>
+    </form>
+
+    <section class="directory" aria-labelledby="directoryTitle">
+      <h2 id="directoryTitle">✦ EXPLORE MORE TOOLS ✦</h2>
+      <div class="service-list">
+        <button class="service" type="button"><span class="emoji">🎬</span> Media Link Guide</button>
+        <button class="service" type="button"><span class="emoji">☁️</span> Cloud Link Guide</button>
+        <button class="service" type="button"><span class="emoji">🔗</span> Link Organizer</button>
+        <button class="service" type="button"><span class="emoji">✨</span> More Tools</button>
+      </div>
+    </section>
+
+    <div class="notice" id="notice" role="status"></div>
+    <p class="footer">Independent interface demo. No downloading, file fetching, or video processing is provided.</p>
+  </main>
+
+  <script>
+    const notice = document.getElementById('notice');
+    document.getElementById('demoForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const value = document.getElementById('linkInput').value.trim();
+      notice.style.display = 'block';
+      notice.textContent = value
+        ? 'Demo only: your link was entered, but this page does not fetch or download files.'
+        : 'Please paste a link to preview the demo interaction.';
+    });
+    document.querySelectorAll('.service').forEach((button) => {
+      button.addEventListener('click', () => {
+        notice.style.display = 'block';
+        notice.textContent = 'Demo button only. No external downloader or file-processing service is connected.';
+      });
+    });
+  </script>
+</body>
+</html>
